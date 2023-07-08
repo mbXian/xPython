@@ -55,7 +55,10 @@ def readPassword():
             pwd = file.readline()
             # 去除密码的末尾换行符
             pwd = pwd.strip('\n')
-            print("尝试密码：" + pwd)
+            print("尝试密码：", pwd)
+            if (not pwd):
+                print("尝试密码为空")
+                break
             bool = wifiConnect(pwd)
             if bool:
                 print("[*] 密码已破解：", pwd)
