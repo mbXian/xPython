@@ -57,7 +57,7 @@ def wifiConnect(pwd):
                 return False
         else:
             print("已有wifi连接")        
-    except Exception, e:
+    except Exception as e:
         print 'str(Exception):\t', str(Exception)
         print 'str(e):\t\t', str(e)
         print 'repr(e):\t', repr(e)
