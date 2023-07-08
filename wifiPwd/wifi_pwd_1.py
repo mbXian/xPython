@@ -9,54 +9,62 @@ def wifiConnect(pwd):
     wifi = pywifi.PyWiFi()
     print("1")
     # 获取第一个无线网卡
-    ifaces = wifi.interfaces()[0]
-    print("2")
-    # 断开所有连接
-    ifaces.disconnect()
-    print("3")
-    time.sleep(1)
-    print("4")
-    wifistatus = ifaces.status()
-    print("5")
-    if wifistatus == const.IFACE_DISCONNECTED:
-        print("6")
-        # 创建WiFi连接文件
-        profile = pywifi.Profile()
-        print("7")
-        # 要连接WiFi的名称
-        profile.ssid = "Tr0e"
-        print("8")
-        # 网卡的开放状态
-        profile.auth = const.AUTH_ALG_OPEN
-        print("9")
-        # wifi加密算法,一般wifi加密算法为wps
-        profile.akm.append(const.AKM_TYPE_WPA2PSK)
-        print("10")
-        # 加密单元
-        profile.cipher = const.CIPHER_TYPE_CCMP
-        print("11")
-        # 调用密码
-        profile.key = pwd
-        print("12")
-        # 删除所有连接过的wifi文件
-        ifaces.remove_all_network_profiles()
-        print("13")
-        # 设定新的连接文件
-        tep_profile = ifaces.add_network_profile(profile)
-        print("14")
-        ifaces.connect(tep_profile)
-        print("15")
-        # wifi连接时间
-        time.sleep(2)
-        print("16")
-        if ifaces.status() == const.IFACE_CONNECTED:
-            print("17")
-            return True
+    try:
+        ifaces = wifi.interfaces()[0]
+        # 断开所有连接
+        ifaces.disconnect()
+        print("3")
+        time.sleep(1)
+        print("4")
+        wifistatus = ifaces.status()
+        print("5")
+        if wifistatus == const.IFACE_DISCONNECTED:
+            print("6")
+            # 创建WiFi连接文件
+            profile = pywifi.Profile()
+            print("7")
+            # 要连接WiFi的名称
+            profile.ssid = "Tr0e"
+            print("8")
+            # 网卡的开放状态
+            profile.auth = const.AUTH_ALG_OPEN
+            print("9")
+            # wifi加密算法,一般wifi加密算法为wps
+            profile.akm.append(const.AKM_TYPE_WPA2PSK)
+            print("10")
+            # 加密单元
+            profile.cipher = const.CIPHER_TYPE_CCMP
+            print("11")
+            # 调用密码
+            profile.key = pwd
+            print("12")
+            # 删除所有连接过的wifi文件
+            ifaces.remove_all_network_profiles()
+            print("13")
+            # 设定新的连接文件
+            tep_profile = ifaces.add_network_profile(profile)
+            print("14")
+            ifaces.connect(tep_profile)
+            print("15")
+            # wifi连接时间
+            time.sleep(2)
+            print("16")
+            if ifaces.status() == const.IFACE_CONNECTED:
+                print("17")
+                return True
+            else:
+                print("18")
+                return False
         else:
-            print("18")
-            return False
-    else:
-        print("已有wifi连接")
+            print("已有wifi连接")        
+    except Exception, e:
+        print 'str(Exception):\t', str(Exception)
+        print 'str(e):\t\t', str(e)
+        print 'repr(e):\t', repr(e)
+        print 'e.message:\t', e.message
+        print 'traceback.print_exc():'; traceback.print_exc()
+        print 'traceback.format_exc():\n%s' % traceback.format_exc()
+    print("2")
 
 
 # 读取密码本
