@@ -69,6 +69,7 @@ def readPassword():
                 # 跳出当前循环，进行下一次循环
                 print("正在破解 SSID 为 %s 的 WIFI密码，当前校验的密码为：%s"%("Tr0e",pwd))
         except:
+            print("报错了")
             continue
     end = datetime.datetime.now()
     if(success):
