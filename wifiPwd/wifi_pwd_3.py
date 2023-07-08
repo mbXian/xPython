@@ -28,6 +28,10 @@ def main():
     wifi_name='HUAWEI-sytech_Wi-Fi5'
     while True:
         wifipwd = file.readline()
+        print("尝试密码：", wifipwd)
+            if (not wifipwd):
+                print("尝试密码为空")
+                break
         try:
             bool = wifiConnect(wifi_name,wifipwd)
             if bool:
@@ -36,6 +40,7 @@ def main():
             else:
                print('本次尝试的密码为：%s，状态：密码错误'%wifipwd)
         except:
+            print("报错了")
             continue
     file.close()
 if __name__=='__main__':
